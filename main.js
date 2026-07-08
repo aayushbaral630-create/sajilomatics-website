@@ -105,6 +105,16 @@
     gsap.registerPlugin(ScrollTrigger);
     if (lenis) lenis.on('scroll', ScrollTrigger.update);
 
+    // hero line reveals (fire on load, after preloader)
+    const heroLines = document.querySelectorAll('.reveal-line > span');
+    if (heroLines.length) {
+      gsap.to(heroLines, {
+        y: 0, duration: 1.3, ease: 'power4.out', stagger: 0.14,
+        delay: pre ? 1.5 : 0.2
+      });
+    }
+    addEventListener('load', () => ScrollTrigger.refresh());
+
     // split headings into line reveals
     document.querySelectorAll('[data-split]').forEach(el => {
       const text = el.textContent.trim();
@@ -113,9 +123,10 @@
       // group words into lines after layout by wrapping each word
       const spans = words.map(w => {
         const s = document.createElement('span');
-        s.textContent = w + ' ';
+        s.textContent = w;
         s.style.display = 'inline-block';
         el.appendChild(s);
+        el.appendChild(document.createTextNode(' '));
         return s;
       });
       gsap.set(spans, { yPercent: 120, opacity: 0 });
@@ -168,9 +179,12 @@
       });
     });
   } else {
-    // reduced motion: show everything
+    // reduced motion / no GSAP: show everything
     document.querySelectorAll('[data-fade]').forEach(el => {
       el.style.opacity = 1; el.style.transform = 'none';
+    });
+    document.querySelectorAll('.reveal-line > span').forEach(el => {
+      el.style.transform = 'none';
     });
   }
 
