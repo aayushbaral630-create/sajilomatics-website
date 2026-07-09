@@ -645,3 +645,64 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .author-box .avatar { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; background: var(--grad-soft); border: 1px solid var(--line); color: var(--cyan); flex: none; }
 .author-box p { color: var(--muted); font-size: 14px; margin: 0; }
 .author-box b { color: var(--text); display: block; font-size: 15.5px; }
+
+/* ============ LIVING CASE VISUALS ============ */
+.cv text { font-family: var(--font-mono); }
+.case__visual { box-shadow: 0 40px 90px -40px rgba(91, 124, 250, 0.35); }
+.case__visual::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.07) 50%, transparent 58%);
+  transform: translateX(-120%);
+  animation: cvsheen 7s ease-in-out infinite;
+}
+@keyframes cvsheen { 0%, 55% { transform: translateX(-120%); } 75%, 100% { transform: translateX(120%); } }
+
+.cv-spin { transform-box: fill-box; transform-origin: center; animation: cvspin 5s linear infinite; }
+.cv-spin-slow { transform-box: fill-box; transform-origin: center; animation: cvspin 26s linear infinite; }
+@keyframes cvspin { to { transform: rotate(360deg); } }
+
+.cv-blink { animation: cvblink 1.6s ease-in-out infinite; }
+@keyframes cvblink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.cv-breathe { transform-box: fill-box; transform-origin: center; animation: cvbreathe 3.5s ease-in-out infinite; }
+@keyframes cvbreathe { 0%, 100% { opacity: 0.10; transform: scale(1); } 50% { opacity: 0.22; transform: scale(1.14); } }
+
+.cv-slide { animation: cvslide 5.5s var(--ease-luxe) infinite; }
+@keyframes cvslide {
+  0%, 14% { transform: translateX(0); opacity: 1; }
+  28%, 46% { transform: translateX(88px); opacity: 1; }
+  60%, 80% { transform: translateX(176px); opacity: 1; }
+  88% { transform: translateX(176px); opacity: 0; }
+  92% { transform: translateX(0); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.cv-pop { transform-box: fill-box; transform-origin: center; animation: cvpop 5.5s ease infinite; }
+@keyframes cvpop {
+  0%, 56% { opacity: 0; transform: scale(0.5); }
+  64%, 84% { opacity: 1; transform: scale(1); }
+  94%, 100% { opacity: 0; transform: scale(0.8); }
+}
+.cv-node { animation: cvnode 2.4s ease-in-out infinite; }
+@keyframes cvnode { 0%, 70% { opacity: 0.55; } 82% { opacity: 1; } 100% { opacity: 0.55; } }
+
+.cv-st { animation: cvstate 6s ease-in-out infinite; }
+@keyframes cvstate {
+  0%, 30% { fill: #35e0ff; }
+  36%, 62% { fill: #8b5cf6; }
+  68%, 94% { fill: #2a3055; }
+  100% { fill: #35e0ff; }
+}
+.cv-toast { animation: cvtoast 6s var(--ease-luxe) infinite; }
+@keyframes cvtoast {
+  0%, 8% { transform: translateX(175px); opacity: 0; }
+  16%, 70% { transform: translateX(0); opacity: 1; }
+  80%, 100% { transform: translateX(175px); opacity: 0; }
+}
+.cv-day { animation: cvday 7s steps(7, end) infinite; }
+@keyframes cvday { to { transform: translateX(154px); } }
+.cv-bar { transform-box: fill-box; transform-origin: left center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-slide, .cv-pop, .cv-toast, .cv-day, .cv-spin, .cv-spin-slow,
+  .cv-blink, .cv-breathe, .cv-node, .cv-st, .case__visual::after { animation: none !important; }
+}

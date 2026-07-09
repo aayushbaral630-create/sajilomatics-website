@@ -268,4 +268,23 @@
       q.setAttribute('aria-expanded', open);
     });
   });
+
+  /* living case visuals: chart draws itself, bars fill on scroll */
+  if (window.gsap && window.ScrollTrigger && !reduced) {
+    document.querySelectorAll('.cv-draw').forEach(p => {
+      const L = p.getTotalLength();
+      p.style.strokeDasharray = L;
+      p.style.strokeDashoffset = L;
+      gsap.to(p, {
+        strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut',
+        scrollTrigger: { trigger: p.closest('.case__visual'), start: 'top 82%' }
+      });
+    });
+    document.querySelectorAll('.cv-bar').forEach(b => {
+      gsap.fromTo(b, { scaleX: 0 }, {
+        scaleX: 1, duration: 1.4, ease: 'power3.out',
+        scrollTrigger: { trigger: b.closest('.case__visual'), start: 'top 82%' }
+      });
+    });
+  }
 })();
