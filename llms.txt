@@ -1,6 +1,6 @@
 # Sajilomatics
 
-> Sajilomatics is a custom software and marketing-automation studio based in Kathmandu, Nepal (founded 2026). The name comes from the Nepali word "sajilo," meaning easy or effortless. The studio builds systems that cut hours of manual work for businesses and turn them into scale.
+> Sajilomatics is a custom software and marketing-automation studio based in Kathmandu, Nepal (founded 2025). The name comes from the Nepali word "sajilo," meaning easy or effortless. The studio builds systems that cut hours of manual work for businesses and turn them into scale.
 
 ## What Sajilomatics does
 - Custom software development: platforms, portals, dashboards, internal tools
