@@ -12,6 +12,8 @@
 - Recruitment Agency Operating System: candidate pipeline, client CRM, scheduling, and document automation in one platform
 - Social Media Manager Automation: AI content engine that plans, drafts, schedules, and reports across 7 channels with human approval
 - Hotel Management System: reservations, housekeeping, billing, and guest communication in one live dashboard
+- Professional CV Builder (own product): web app generating professional CVs in 9 templates plus Europass and Mirror formats; rebuilds uploaded CVs or generates from pasted plain text
+- Manpower Management System (own product): manages the post-selection workflow for Nepal's manpower agencies - worker records, document and visa stage tracking, deployment; complements the Recruitment Agency OS
 
 ## Team
 Five specialists led by founder Aayush Baral (digital marketing consultant) and co-founder Prabhakar Kafle (senior software engineer).
