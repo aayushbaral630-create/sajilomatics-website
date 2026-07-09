@@ -127,6 +127,12 @@
     points.rotation.z = Math.sin(t * 0.05) * 0.05;
     dust.rotation.y = t * 0.015;
 
+    // scroll dispersal: the infinity breaks apart as you scroll
+    const sy = Math.min(1, (window.scrollY || 0) / innerHeight);
+    const sc = 1 + sy * 0.7;
+    points.scale.set(sc, sc, sc);
+    mat.opacity = 0.85 * (1 - sy * 0.9);
+    dust.material.opacity = 0.35 * (1 - sy);
     renderer.render(scene, camera);
   }
   requestAnimationFrame(frame);

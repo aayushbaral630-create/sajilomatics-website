@@ -1,0 +1,28 @@
+# Sajilomatics
+
+> Sajilomatics is a custom software and marketing-automation studio based in Kathmandu, Nepal (founded 2026). The name comes from the Nepali word "sajilo," meaning easy or effortless. The studio builds systems that cut hours of manual work for businesses and turn them into scale.
+
+## What Sajilomatics does
+- Custom software development: platforms, portals, dashboards, internal tools
+- Marketing automation: lead pipelines, email/SMS flows, CRM automation
+- AI & workflow automation: process audits, AI agents, document automation
+- Web & mobile products, digital marketing & growth, data & analytics
+
+## Selected work
+- Recruitment Agency Operating System: candidate pipeline, client CRM, scheduling, and document automation in one platform
+- Social Media Manager Automation: AI content engine that plans, drafts, schedules, and reports across 7 channels with human approval
+- Hotel Management System: reservations, housekeeping, billing, and guest communication in one live dashboard
+
+## Team
+Five specialists led by founder Aayush Baral (digital marketing consultant) and co-founder Prabhakar Kafle (senior software engineer).
+
+## Pages
+- [Home](https://sajilomatics.com/): overview and featured work
+- [Work](https://sajilomatics.com/work.html): case studies
+- [Services](https://sajilomatics.com/services.html): full service list, engagement models, FAQ
+- [About](https://sajilomatics.com/about.html): story and team
+- [Blog](https://sajilomatics.com/insights.html): articles on automation and software
+- [Contact](https://sajilomatics.com/contact.html): book a free 30-minute audit call
+
+## Contact
+Email: info@sajilomatics.com — Kathmandu, Nepal

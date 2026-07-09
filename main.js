@@ -225,3 +225,47 @@
     el.textContent = new Date().getFullYear();
   });
 })();
+
+/* ============ UPGRADE PASS ============ */
+(function () {
+  'use strict';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  /* scroll progress bar */
+  const bar = document.createElement('div');
+  bar.className = 'progress'; bar.innerHTML = '<i></i>';
+  document.body.appendChild(bar);
+  const fill = bar.firstElementChild;
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    fill.style.transform = 'scaleX(' + (h.scrollTop / ((h.scrollHeight - h.clientHeight) || 1)) + ')';
+  }, { passive: true });
+
+  /* 3D tilt on case visuals & post thumbnails */
+  if (!isTouch && !reduced && window.gsap) {
+    document.querySelectorAll('.case__visual, .post-card .thumb').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        gsap.to(el, {
+          rotateY: ((e.clientX - r.left) / r.width - .5) * 10,
+          rotateX: (.5 - (e.clientY - r.top) / r.height) * 10,
+          transformPerspective: 900, duration: .5, ease: 'power2.out'
+        });
+      });
+      el.addEventListener('mouseleave', () =>
+        gsap.to(el, { rotateX: 0, rotateY: 0, duration: .9, ease: 'elastic.out(1,0.5)' }));
+    });
+  }
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q'), a = item.querySelector('.faq-a');
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
+      q.setAttribute('aria-expanded', open);
+    });
+  });
+})();
