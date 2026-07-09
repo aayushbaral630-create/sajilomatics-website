@@ -9,9 +9,9 @@
 - Web & mobile products, digital marketing & growth, data & analytics
 
 ## Selected work
-- Recruitment Agency Operating System: candidate pipeline, client CRM, scheduling, and document automation in one platform
-- Social Media Manager Automation: AI content engine that plans, drafts, schedules, and reports across 7 channels with human approval
-- Hotel Management System: reservations, housekeeping, billing, and guest communication in one live dashboard
+- Manpower Operating System: candidate pipeline, client CRM, scheduling, and document automation in one platform. Clients: Golden Crown Overseas Pvt. Ltd. (Kathmandu, Nepal) and Golden Crown Facilities Management (Dubai, UAE)
+- Social Media Manager Automation: AI content engine that plans, drafts, schedules, and reports across 7 channels with human approval. Client: Barsha Adhikari, content manager (Preston, UK)
+- Restaurant Management System: orders, kitchen flow, billing, and live sales — built for Aagaman Thakali Chulo (Gwarko, Lalitpur, Nepal)
 - Professional CV Builder (own product): web app generating professional CVs in 9 templates plus Europass and Mirror formats; rebuilds uploaded CVs or generates from pasted plain text
 - Manpower Management System (own product): manages the post-selection workflow for Nepal's manpower agencies - worker records, document and visa stage tracking, deployment; complements the Recruitment Agency OS
 
@@ -27,4 +27,4 @@ Five specialists led by founder Aayush Baral (digital marketing consultant) and 
 - [Contact](https://sajilomatics.com/contact.html): book a free 30-minute audit call
 
 ## Contact
-Email: info@sajilomatics.com — Kathmandu, Nepal
+Email: info@sajilomatics.com — Phone/WhatsApp: +977 9847778008 — Book a call: https://calendly.com/foundersajilomatics/new-meeting — Founder portfolio: https://buildwithaayush.sajilomatics.com/ — Kathmandu, Nepal
