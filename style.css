@@ -728,7 +728,48 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .wa-btn[hidden] { display: none; }
 @media (max-width: 760px) { .wa-btn { right: 18px; bottom: 18px; width: 52px; height: 52px; } }
 
+/* ============ CV MAESTRO SIMULATOR (12s loop) ============ */
+.cvm-line { animation: cvmline 12s ease infinite; opacity: 0; }
+@keyframes cvmline {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  94% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.cvm-caret { animation: cvmcaret 1s steps(1) infinite; }
+@keyframes cvmcaret { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+.cvm-build { animation: cvmbuild 12s ease infinite; opacity: 0; }
+@keyframes cvmbuild {
+  0% { opacity: 0; transform: translateY(8px); }
+  4% { opacity: 1; transform: none; }
+  94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+.cvm-t1 { animation: cvmt1 12s ease infinite; opacity: 0; }
+@keyframes cvmt1 { 0%, 3% { opacity: 0; } 8%, 60% { opacity: 1; } 64%, 100% { opacity: 0; } }
+.cvm-t2 { animation: cvmt2 12s ease infinite; opacity: 0; }
+@keyframes cvmt2 { 0%, 62% { opacity: 0; } 66%, 80% { opacity: 1; } 84%, 100% { opacity: 0; } }
+.cvm-t3 { animation: cvmt3 12s ease infinite; opacity: 0; }
+@keyframes cvmt3 { 0%, 82% { opacity: 0; } 86%, 97% { opacity: 1; } 100% { opacity: 0; } }
+
+.cvm-badge { transform-box: fill-box; transform-origin: center; animation: cvmbadge 12s ease infinite; opacity: 0; }
+@keyframes cvmbadge {
+  0%, 48% { opacity: 0; transform: scale(0.6); }
+  53%, 94% { opacity: 1; transform: scale(1); }
+  98%, 100% { opacity: 0; }
+}
+.cvm-pdf { transform-box: fill-box; transform-origin: center; animation: cvmpdf 12s ease infinite; opacity: 0; }
+@keyframes cvmpdf {
+  0%, 30% { opacity: 0; transform: scale(0.6); }
+  35%, 96% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cv-slide, .cv-pop, .cv-toast, .cv-day, .cv-spin, .cv-spin-slow,
   .cv-blink, .cv-breathe, .cv-node, .cv-st, .case__visual::after { animation: none !important; }
+  .cvm-line, .cvm-build, .cvm-t1, .cvm-badge, .cvm-pdf { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .cvm-t2, .cvm-t3, .cvm-caret { animation: none !important; opacity: 0 !important; }
 }
