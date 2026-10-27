@@ -49,16 +49,23 @@
       <li><a href="insights.html">Blog</a></li>
       <li><a href="contact.html" class="btn" style="padding:12px 24px;font-size:13px">Book a call</a></li>
     </ul></nav>
-    <button class="nav__burger" aria-label="Menu"><span></span><span></span></button>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
   </div>
 </header>
-<div class="mobile-menu">
-  <a href="index.html">Home</a>
-  <a href="work.html">Work</a>
-  <a href="services.html">Services</a>
-  <a href="about.html">About</a>
-  <a href="insights.html">Blog</a>
-  <a href="contact.html">Book a call</a>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav class="mobile-menu__links" aria-label="Mobile">
+    <a href="index.html"><span>01</span>Home</a>
+    <a href="work.html"><span>02</span>Work</a>
+    <a href="services.html"><span>03</span>Services</a>
+    <a href="about.html"><span>04</span>About</a>
+    <a href="insights.html"><span>05</span>Blog</a>
+  </nav>
+  <a href="contact.html" class="btn btn--solid mobile-menu__cta">Book a free call <span class="arr">&rarr;</span></a>
+  <div class="mobile-menu__meta">
+    <a href="mailto:info@sajilomatics.com">info@sajilomatics.com</a>
+    <a href="https://wa.me/9779847778008" target="_blank" rel="noopener">WhatsApp &middot; +977 984-777-8008</a>
+    <span>Kathmandu, Nepal</span>
+  </div>
 </div>
 
 <section class="page-hero">

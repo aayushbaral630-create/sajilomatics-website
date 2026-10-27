@@ -75,10 +75,23 @@
   const burger = document.querySelector('.nav__burger');
   const mobileMenu = document.querySelector('.mobile-menu');
   if (burger && mobileMenu) {
-    burger.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('is-open');
+    const setMenu = open => {
+      mobileMenu.classList.toggle('is-open', open);
       burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open);
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      mobileMenu.setAttribute('aria-hidden', !open);
+      document.body.classList.toggle('menu-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      if (lenis) open ? lenis.stop() : lenis.start();
+    };
+    burger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('is-open')));
+    mobileMenu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    addEventListener('resize', () => { if (innerWidth > 760) setMenu(false); });
+    const page = location.pathname.split('/').pop() || 'index.html';
+    mobileMenu.querySelectorAll('.mobile-menu__links a').forEach(a => {
+      if (a.getAttribute('href') === page) a.classList.add('is-active');
     });
   }
 

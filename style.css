@@ -114,10 +114,6 @@ button { font: inherit; cursor: pointer; }
   transform: translateY(101%);
   pointer-events: none;
 }
-.curtain::before {
-  content: ''; position: absolute; top: -80px; left: 0; right: 0; height: 80px;
-  background: inherit; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-}
 
 /* ============ CURSOR ============ */
 .cursor-dot, .cursor-ring {
@@ -193,28 +189,45 @@ button { font: inherit; cursor: pointer; }
 .nav__burger.is-open span:nth-child(2) { top: 21px; transform: rotate(-45deg); }
 
 .mobile-menu {
-  position: fixed; inset: 0; z-index: 950;
-  background: rgba(6, 7, 14, 0.96);
+  position: fixed; inset: 0; z-index: 890;              /* below the nav, so the close button stays visible */
+  background: rgba(6, 7, 14, 0.97);
   backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 0 32px; gap: 8px;
+  display: flex; flex-direction: column;
+  padding: calc(var(--nav-h) + 12px) 24px calc(28px + env(safe-area-inset-bottom));
+  overflow-y: auto; overscroll-behavior: contain;
   opacity: 0; visibility: hidden;
-  transition: opacity .5s var(--ease-out), visibility .5s;
+  transition: opacity .4s var(--ease-out), visibility .4s;
 }
 .mobile-menu.is-open { opacity: 1; visibility: visible; }
-.mobile-menu a {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(2rem, 8vw, 3.2rem);
-  padding: 10px 0; border-bottom: 1px solid var(--line);
-  transform: translateY(30px); opacity: 0;
-  transition: transform .6s var(--ease-out), opacity .6s;
+.mobile-menu__links { display: flex; flex-direction: column; }
+.mobile-menu__links a {
+  display: flex; align-items: baseline; gap: 16px;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 1.375rem; letter-spacing: -0.01em; color: var(--text);
+  padding: 15px 0; border-bottom: 1px solid var(--line);
+  transform: translateY(14px); opacity: 0;
+  transition: transform .5s var(--ease-out), opacity .5s, color .3s;
 }
-.mobile-menu.is-open a { transform: none; opacity: 1; }
-.mobile-menu a:nth-child(2) { transition-delay: .05s; }
-.mobile-menu a:nth-child(3) { transition-delay: .1s; }
-.mobile-menu a:nth-child(4) { transition-delay: .15s; }
-.mobile-menu a:nth-child(5) { transition-delay: .2s; }
-.mobile-menu a:nth-child(6) { transition-delay: .25s; }
+.mobile-menu__links a span {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 400;
+  letter-spacing: .18em; color: var(--faint); min-width: 20px;
+}
+.mobile-menu__links a.is-active { color: var(--cyan); }
+.mobile-menu__links a:active { color: var(--cyan); }
+.mobile-menu.is-open .mobile-menu__links a { transform: none; opacity: 1; }
+.mobile-menu__links a:nth-child(2) { transition-delay: .04s; }
+.mobile-menu__links a:nth-child(3) { transition-delay: .08s; }
+.mobile-menu__links a:nth-child(4) { transition-delay: .12s; }
+.mobile-menu__links a:nth-child(5) { transition-delay: .16s; }
+.mobile-menu__cta { margin-top: 28px; justify-content: center; width: 100%; }
+.mobile-menu__meta {
+  margin-top: auto; padding-top: 32px;
+  display: flex; flex-direction: column; gap: 10px;
+  font-size: 14px; color: var(--muted);
+}
+.mobile-menu__meta a { color: var(--muted); }
+.mobile-menu__meta span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+body.menu-open .nav { transform: none !important; background: transparent; border-bottom-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
 /* ============ BUTTONS ============ */
 .btn {
@@ -835,3 +848,17 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
    shows at its backing-store size (viewport × devicePixelRatio) and renders
    oversized and off-centre on HiDPI laptops and phones. */
 #hero-canvas { width: 100%; height: 100%; }
+
+
+/* ============ MOBILE POLISH (iOS + Android) ============ */
+@media (max-width: 760px) {
+  .footer__word { font-size: 9.2vw; letter-spacing: 0; }       /* full word fits, no clipping */
+  .footer__grid { gap: 32px 24px; margin-bottom: 56px; }
+  .footer__base { flex-direction: column; gap: 10px; }
+  .nav__logo-word { font-size: 13px; letter-spacing: .24em; }
+  .wa-btn { bottom: calc(18px + env(safe-area-inset-bottom)); }
+  body::after { animation: none; }                              /* static grain: saves battery */
+}
+@media (max-width: 380px) {
+  .nav__logo-word { display: none; }                            /* very small phones: mark only */
+}

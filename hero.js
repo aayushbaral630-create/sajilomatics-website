@@ -206,7 +206,12 @@
     pos.needsUpdate = true;
 
     // dim mid-journey so content stays readable, bright at both ends
-    mat.opacity = 0.85 - 0.38 * Math.sin(scrollP * Math.PI);
+    let op = 0.85 - 0.38 * Math.sin(scrollP * Math.PI);
+    // phones: text spans the full width, so particles sit further back once you leave the hero
+    if (isMobile) op *= 1 - 0.55 * smooth(Math.min(1, scrollP / 0.06));
+    // footer: fade out so contact details and links stay clean and readable
+    op *= 1 - 0.85 * smooth(Math.min(1, Math.max(0, (scrollP - 0.9) / 0.1)));
+    mat.opacity = op;
 
     // rotation: gentle at rest, more momentum mid-morph
     tx += (mouseX - tx) * 0.03;
