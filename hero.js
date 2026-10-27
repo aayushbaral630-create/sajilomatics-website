@@ -112,7 +112,10 @@
             if (data[(y * c.width + x) * 4 + 3] > 140) px.push(x, y);
         const n = px.length / 2;
         if (n < 50) return;
-        const H = 5.6, s = H / c.height;           // logo ≈ 5.6 world units tall
+        // tall mark: keep it ~55% of the visible height and, on desktop,
+        // sit it in the open space right of the headline (centred on phones)
+        const H = isMobile ? 3.2 : 3.6, s = H / c.height;
+        const shiftX = isMobile ? 0 : Math.min(2.4, (innerWidth / innerHeight) * 1.25);
         const ox = c.width / 2, oy = c.height / 2;
         const target = SHAPES[0];                   // same array as SHAPES[3]
         const top = new THREE.Color('#45d2e0'), bot = new THREE.Color('#2f7fe0');
@@ -120,7 +123,7 @@
           const k = (Math.random() * n) | 0;
           const x = px[k * 2] + (Math.random() - 0.5) * 1.6;
           const y = px[k * 2 + 1] + (Math.random() - 0.5) * 1.6;
-          target[i * 3]     = (x - ox) * s;
+          target[i * 3]     = (x - ox) * s + shiftX;
           target[i * 3 + 1] = -(y - oy) * s;
           target[i * 3 + 2] = (Math.random() - 0.5) * 0.35;
           tmp.copy(top).lerp(bot, y / c.height);    // logo's own top→bottom gradient
