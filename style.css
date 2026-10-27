@@ -107,13 +107,6 @@ button { font: inherit; cursor: pointer; }
   transform: scaleX(0); background: var(--grad); display: block;
 }
 
-/* page transition curtain */
-.curtain {
-  position: fixed; inset: 0; z-index: 9500;
-  background: linear-gradient(180deg, var(--ink-3), var(--ink));
-  transform: translateY(101%);
-  pointer-events: none;
-}
 
 /* ============ CURSOR ============ */
 .cursor-dot, .cursor-ring {
@@ -867,3 +860,5 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .wa-btn { transition: transform .35s var(--ease-out), box-shadow .35s, opacity .3s; }
 body.menu-open .wa-btn { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) { .footer__word { font-size: 8.6vw; } }
+
+.curtain { display: none !important; }

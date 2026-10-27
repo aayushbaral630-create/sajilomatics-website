@@ -95,24 +95,6 @@
     });
   }
 
-  /* ---------- Page transition curtain ---------- */
-  const curtain = document.createElement('div');
-  curtain.className = 'curtain';
-  document.body.appendChild(curtain);
-  document.querySelectorAll('a[href$=".html"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const href = a.getAttribute('href');
-      if (!href || a.target === '_blank' || reduced || !window.gsap) return;
-      e.preventDefault();
-      gsap.to(curtain, {
-        y: '-101%', duration: 0.6, ease: 'power4.inOut',
-        onStart: () => { curtain.style.transform = 'translateY(101%)'; curtain.style.pointerEvents = 'auto'; },
-        onComplete: () => { location.href = href; }
-      });
-    });
-  });
-  addEventListener('pageshow', () => { curtain.style.pointerEvents = 'none'; curtain.style.transform = 'translateY(101%)'; });
-
   /* ---------- GSAP scroll choreography ---------- */
   if (window.gsap && window.ScrollTrigger && !reduced) {
     gsap.registerPlugin(ScrollTrigger);
