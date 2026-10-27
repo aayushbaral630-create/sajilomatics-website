@@ -830,3 +830,8 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .preloader__mark { display: block; animation: markpulse 1.4s ease-in-out infinite alternate; }
 @keyframes markpulse { from { opacity: .55; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .preloader__mark { animation: none; } }
+
+/* hero canvas: pin display size to the viewport. Without this the canvas
+   shows at its backing-store size (viewport × devicePixelRatio) and renders
+   oversized and off-centre on HiDPI laptops and phones. */
+#hero-canvas { width: 100%; height: 100%; }
