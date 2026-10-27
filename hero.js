@@ -1,7 +1,7 @@
 /* SAJILOMATICS — morphing particle hero (Three.js)
-   The brand infinity morphs as you scroll the page:
-   ∞ infinity → sphere → torus knot → back to ∞
-   Scroll-scrubbed, cursor parallax, cyan→violet spectrum.
+   The Sajilomatics S mark (sampled from logo-mark.png) morphs as you scroll:
+   S mark → sphere → torus knot → back to the S mark
+   Scroll-scrubbed, cursor parallax, cyan→blue brand gradient.
    Degrades gracefully (reduced motion / no WebGL). */
 (function () {
   'use strict';
@@ -27,21 +27,21 @@
 
   /* ---------- morph target shapes ---------- */
   function makeShapes(n) {
-    const inf = new Float32Array(n * 3);
+    const mark = new Float32Array(n * 3);   // fallback ∞ until the logo loads
     const sph = new Float32Array(n * 3);
     const knot = new Float32Array(n * 3);
     const GA = 2.399963229728653; // golden angle
 
     for (let i = 0; i < n; i++) {
       const i3 = i * 3;
-      // — infinity (lemniscate + tube scatter)
+      // — fallback: lemniscate + tube scatter
       const t = (i / n) * Math.PI * 2;
       const d = 1 + Math.sin(t) * Math.sin(t);
       const r = Math.pow(Math.random(), 2.2) * 0.42;
       const a = Math.random() * Math.PI * 2;
-      inf[i3]     = (3.1 * Math.cos(t)) / d + Math.cos(a) * r;
-      inf[i3 + 1] = (3.1 * Math.sin(t) * Math.cos(t)) / d * 1.15 + Math.sin(a) * r;
-      inf[i3 + 2] = (Math.random() - 0.5) * 0.55;
+      mark[i3]     = (3.1 * Math.cos(t)) / d + Math.cos(a) * r;
+      mark[i3 + 1] = (3.1 * Math.sin(t) * Math.cos(t)) / d * 1.15 + Math.sin(a) * r;
+      mark[i3 + 2] = (Math.random() - 0.5) * 0.55;
 
       // — fibonacci sphere
       const y = 1 - (2 * i) / (n - 1);
@@ -62,12 +62,12 @@
       knot[i3 + 1] = (core * Math.sin(p * kt)) * 1.02 + Math.sin(ka) * kr;
       knot[i3 + 2] = Math.sin(q * kt) * 1.15 + (Math.random() - 0.5) * 0.2;
     }
-    return [inf, sph, knot, inf]; // journey: ∞ → sphere → knot → ∞
+    return [mark, sph, knot, mark]; // journey: S → sphere → knot → S
   }
   const SHAPES = makeShapes(COUNT);
 
   /* ---------- geometry, colors ---------- */
-  const positions = new Float32Array(SHAPES[0]); // start as infinity
+  const positions = new Float32Array(SHAPES[0]);
   const colors = new Float32Array(COUNT * 3);
   const seeds = new Float32Array(COUNT);
   const cyan = new THREE.Color('#35e0ff');
@@ -93,6 +93,44 @@
   });
   const points = new THREE.Points(geo, mat);
   scene.add(points);
+
+  /* ---------- brand mark: sample the real logo into particles ----------
+     Reads logo-mark.png, scatters particles across its strokes, and makes
+     that the opening + closing shape (replaces the fallback in place). */
+  (function useLogoShape() {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth; c.height = img.naturalHeight;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const data = ctx.getImageData(0, 0, c.width, c.height).data;
+        const px = [];
+        for (let y = 0; y < c.height; y += 1)
+          for (let x = 0; x < c.width; x += 1)
+            if (data[(y * c.width + x) * 4 + 3] > 140) px.push(x, y);
+        const n = px.length / 2;
+        if (n < 50) return;
+        const H = 5.6, s = H / c.height;           // logo ≈ 5.6 world units tall
+        const ox = c.width / 2, oy = c.height / 2;
+        const target = SHAPES[0];                   // same array as SHAPES[3]
+        const top = new THREE.Color('#45d2e0'), bot = new THREE.Color('#2f7fe0');
+        for (let i = 0; i < COUNT; i++) {
+          const k = (Math.random() * n) | 0;
+          const x = px[k * 2] + (Math.random() - 0.5) * 1.6;
+          const y = px[k * 2 + 1] + (Math.random() - 0.5) * 1.6;
+          target[i * 3]     = (x - ox) * s;
+          target[i * 3 + 1] = -(y - oy) * s;
+          target[i * 3 + 2] = (Math.random() - 0.5) * 0.35;
+          tmp.copy(top).lerp(bot, y / c.height);    // logo's own top→bottom gradient
+          colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
+        }
+        geo.attributes.color.needsUpdate = true;
+      } catch (e) { /* keep the fallback shape */ }
+    };
+    img.src = 'logo-mark.png';
+  })();
 
   /* faint dust field */
   const DUST = isMobile ? 200 : 400;
@@ -125,7 +163,7 @@
   document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
 
   /* ---------- scroll-scrubbed morphing ---------- */
-  // keyframes across the page: 0 → ∞ | 0.38 → sphere | 0.72 → knot | 1 → ∞
+  // keyframes across the page: 0 → S | 0.38 → sphere | 0.72 → knot | 1 → S
   const KEYS = [0, 0.38, 0.72, 1];
   const smooth = x => x * x * (3 - 2 * x); // smoothstep
 
@@ -138,7 +176,7 @@
   readScroll();
 
   const pos = geo.attributes.position;
-  let t0 = performance.now();
+  const t0 = performance.now();
 
   function frame(now) {
     requestAnimationFrame(frame);

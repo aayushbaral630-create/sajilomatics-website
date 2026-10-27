@@ -824,3 +824,9 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .consent-gate p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
 .consent-gate .consent-gate__alt { font-size: 13.5px; margin: 22px 0 0; }
 .consent-gate__alt a { color: var(--cyan); }
+
+/* ============ BRAND MARK (official S logo) ============ */
+.nav__mark { display: block; flex: none; object-fit: contain; }
+.preloader__mark { display: block; animation: markpulse 1.4s ease-in-out infinite alternate; }
+@keyframes markpulse { from { opacity: .55; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .preloader__mark { animation: none; } }
