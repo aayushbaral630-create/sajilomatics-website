@@ -101,9 +101,14 @@
       <div data-fade>
         <!-- CALENDLY EMBED: replace this shell with your Calendly inline widget snippet.
              Get it at calendly.com -> Share -> Embed inline. -->
-        <div class="calendly-shell" style="padding:0;overflow:hidden;background:#0a0c18">
-<div class="calendly-inline-widget" data-url="https://calendly.com/foundersajilomatics/new-meeting?hide_gdpr_banner=1&amp;background_color=0a0c18&amp;text_color=eef1ff&amp;primary_color=35e0ff" style="min-width:320px;height:680px;width:100%"></div>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <div class="calendly-shell" id="booking" data-calendly="https://calendly.com/foundersajilomatics/new-meeting?hide_gdpr_banner=1&amp;background_color=0a0c18&amp;text_color=eef1ff&amp;primary_color=35e0ff">
+<div class="consent-gate" id="booking-gate">
+  <div class="consent-gate__icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div>
+  <h3>Pick a time that suits you</h3>
+  <p>The booking calendar is provided by Calendly, which sets its own cookies. Load it to see live availability.</p>
+  <button type="button" class="btn btn--solid" data-consent-accept>Allow cookies &amp; load calendar <span class="arr">&rarr;</span></button>
+  <p class="consent-gate__alt">Prefer not to? Email <a href="mailto:info@sajilomatics.com">info@sajilomatics.com</a> or <a href="https://wa.me/9779847778008" target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
+</div>
 </div>
       </div>
     </div>
@@ -151,7 +156,7 @@
     </div>
     <div class="footer__word" aria-hidden="true">SAJILOMATICS</div>
     <div class="footer__base">
-      <span>&copy; <span data-year>2026</span> Sajilomatics Pvt. Ltd.</span>
+      <span>&copy; <span data-year>2026</span> Sajilomatics Pvt. Ltd. &middot; <a href="privacy.html" class="footer__legal">Privacy &amp; cookies</a> &middot; <button type="button" class="footer__legal" data-cookie-settings>Cookie settings</button></span>
       <span>Crafted with obsession in Kathmandu &#127475;&#127477;</span>
     </div>
   </div>

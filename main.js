@@ -288,3 +288,56 @@
     });
   }
 })();
+
+/* ============ COOKIE CONSENT ============ */
+(function () {
+  'use strict';
+  const KEY = 'sjm_consent'; // 'all' | 'essential'
+  const get = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  const set = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
+
+  /* Calendly loads only with consent */
+  function loadCalendly() {
+    const shell = document.getElementById('booking');
+    if (!shell || shell.dataset.loaded) return;
+    shell.dataset.loaded = '1';
+    shell.classList.add('is-loaded');
+    shell.innerHTML = '<div class="calendly-inline-widget" data-url="' + shell.dataset.calendly +
+      '" style="min-width:320px;height:680px;width:100%"></div>';
+    const s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  /* banner */
+  const bar = document.createElement('div');
+  bar.className = 'consent';
+  bar.setAttribute('role', 'dialog');
+  bar.setAttribute('aria-live', 'polite');
+  bar.setAttribute('aria-label', 'Cookie preferences');
+  bar.innerHTML =
+    '<p><b>Cookies, kept minimal.</b> Our analytics are cookie-free. The only cookies come from the ' +
+    'optional Calendly booking calendar. <a href="privacy.html">Learn more</a></p>' +
+    '<div class="consent__btns">' +
+    '<button type="button" class="consent__btn" data-consent-essential>Essential only</button>' +
+    '<button type="button" class="consent__btn consent__btn--yes" data-consent-accept>Accept all</button>' +
+    '</div>';
+  document.body.appendChild(bar);
+
+  const show = () => { bar.classList.add('is-open'); };
+  const hide = () => { bar.classList.remove('is-open'); };
+
+  function accept() { set('all'); hide(); loadCalendly(); }
+  function essential() { set('essential'); hide(); }
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-consent-accept]')) accept();
+    else if (e.target.closest('[data-consent-essential]')) essential();
+    else if (e.target.closest('[data-cookie-settings]')) show();
+  });
+
+  const choice = get();
+  if (choice === 'all') loadCalendly();
+  if (!choice) setTimeout(show, 1600); // after the preloader
+})();

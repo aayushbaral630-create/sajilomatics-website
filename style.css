@@ -609,7 +609,7 @@ button { font: inherit; cursor: pointer; }
   [data-fade] { opacity: 1; transform: none; }
   .reveal-line > span { transform: none; }
 }
-                     
+
 /* ============ UPGRADE PASS ============ */
 a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
@@ -773,3 +773,54 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   .cvm-line, .cvm-build, .cvm-t1, .cvm-badge, .cvm-pdf { animation: none !important; opacity: 1 !important; transform: none !important; }
   .cvm-t2, .cvm-t3, .cvm-caret { animation: none !important; opacity: 0 !important; }
 }
+
+/* ============ COOKIE CONSENT ============ */
+.consent {
+  position: fixed; left: 24px; bottom: 24px; z-index: 9700;
+  width: min(440px, calc(100% - 48px));
+  background: rgba(14, 17, 34, 0.94);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line-strong); border-radius: 18px;
+  padding: 22px 22px 20px;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+  transform: translateY(24px); opacity: 0; visibility: hidden;
+  transition: transform .6s var(--ease-out), opacity .5s, visibility .5s;
+}
+.consent.is-open { transform: none; opacity: 1; visibility: visible; }
+.consent p { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 16px; }
+.consent b { color: var(--text); }
+.consent a { color: var(--cyan); }
+.consent__btns { display: flex; gap: 10px; }
+.consent__btn {
+  flex: 1; padding: 11px 16px; border-radius: 100px;
+  font-family: var(--font-body); font-weight: 700; font-size: 13.5px;
+  background: transparent; color: var(--text);
+  border: 1px solid var(--line-strong);
+  transition: border-color .3s, background .3s, transform .3s var(--ease-out);
+}
+.consent__btn:hover { border-color: var(--cyan); }
+.consent__btn--yes { background: var(--grad); color: #04050c; border-color: transparent; }
+.consent__btn--yes:hover { transform: translateY(-2px); }
+@media (max-width: 760px) {
+  .consent { left: 12px; right: 12px; bottom: 84px; width: auto; }
+}
+
+/* footer legal links */
+.footer__legal {
+  color: var(--faint); background: none; border: none; padding: 0;
+  font: inherit; letter-spacing: inherit; cursor: pointer; transition: color .3s;
+}
+.footer__legal:hover { color: var(--cyan); }
+
+/* booking gate on contact page */
+.calendly-shell.is-loaded { padding: 0; overflow: hidden; background: #0a0c18; display: block; }
+.consent-gate { max-width: 400px; margin: 0 auto; }
+.consent-gate__icon {
+  width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 20px;
+  display: grid; place-items: center; color: var(--cyan);
+  background: var(--grad-soft); border: 1px solid var(--line);
+}
+.consent-gate h3 { font-size: 1.45rem; margin-bottom: 12px; }
+.consent-gate p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+.consent-gate .consent-gate__alt { font-size: 13.5px; margin: 22px 0 0; }
+.consent-gate__alt a { color: var(--cyan); }
